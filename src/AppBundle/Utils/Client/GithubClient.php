@@ -30,8 +30,14 @@ class GithubClient implements VcsClientInterface
         return $user;
     }
 
-    public function getProjectData(string $username, string $projectName): array
+    public function getRepositoryData(string $username, string $repoName): array
     {
-        // TODO: Implement getRepository() method.
+        try {
+            $repo = $this->client->api('repo')->show($username, $repoName);
+        } catch (RuntimeException $exception) {
+            return [];
+        }
+
+        return $repo;
     }
 }

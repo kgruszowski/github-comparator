@@ -22,7 +22,7 @@ class ComparisonController extends FOSRestController
         $client = $vcsClientFactory->getClient('github');
 
         return new JsonResponse([
-            'status' => $client->getUserData('kgruszowski')
+            'status' => $client->get('kgruszowski')
         ]);
     }
 }

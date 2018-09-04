@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-class Project
+class Repository
 {
 
     /** @var string $name */
@@ -48,9 +48,9 @@ class Project
 
     /**
      * @param string $name
-     * @return Project
+     * @return Repository
      */
-    public function setName(string $name): Project
+    public function setName(string $name): Repository
     {
         $this->name = $name;
         return $this;
@@ -66,9 +66,9 @@ class Project
 
     /**
      * @param string $fullName
-     * @return Project
+     * @return Repository
      */
-    public function setFullName(string $fullName): Project
+    public function setFullName(string $fullName): Repository
     {
         $this->fullName = $fullName;
         return $this;
@@ -84,9 +84,9 @@ class Project
 
     /**
      * @param string $user
-     * @return Project
+     * @return Repository
      */
-    public function setUser(string $user): Project
+    public function setUser(string $user): Repository
     {
         $this->user = $user;
         return $this;
@@ -102,9 +102,9 @@ class Project
 
     /**
      * @param string $url
-     * @return Project
+     * @return Repository
      */
-    public function setUrl(string $url): Project
+    public function setUrl(string $url): Repository
     {
         $this->url = $url;
         return $this;
@@ -120,9 +120,9 @@ class Project
 
     /**
      * @param string $language
-     * @return Project
+     * @return Repository
      */
-    public function setLanguage(string $language): Project
+    public function setLanguage(string $language): Repository
     {
         $this->language = $language;
         return $this;
@@ -138,9 +138,9 @@ class Project
 
     /**
      * @param int $numOfStars
-     * @return Project
+     * @return Repository
      */
-    public function setNumOfStars(int $numOfStars): Project
+    public function setNumOfStars(int $numOfStars): Repository
     {
         $this->numOfStars = $numOfStars;
         return $this;
@@ -156,9 +156,9 @@ class Project
 
     /**
      * @param int $numOfWatchers
-     * @return Project
+     * @return Repository
      */
-    public function setNumOfWatchers(int $numOfWatchers): Project
+    public function setNumOfWatchers(int $numOfWatchers): Repository
     {
         $this->numOfWatchers = $numOfWatchers;
         return $this;
@@ -174,7 +174,7 @@ class Project
 
     /**
      * @param mixed $numOfForks
-     * @return Project
+     * @return Repository
      */
     public function setNumOfForks($numOfForks)
     {
@@ -192,9 +192,9 @@ class Project
 
     /**
      * @param \DateTime $createdAt
-     * @return Project
+     * @return Repository
      */
-    public function setCreatedAt(\DateTime $createdAt): Project
+    public function setCreatedAt(\DateTime $createdAt): Repository
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -210,9 +210,9 @@ class Project
 
     /**
      * @param \DateTime $updatedAt
-     * @return Project
+     * @return Repository
      */
-    public function setUpdatedAt(\DateTime $updatedAt): Project
+    public function setUpdatedAt(\DateTime $updatedAt): Repository
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -228,9 +228,9 @@ class Project
 
     /**
      * @param bool $private
-     * @return Project
+     * @return Repository
      */
-    public function setPrivate(bool $private): Project
+    public function setPrivate(bool $private): Repository
     {
         $this->private = $private;
         return $this;
