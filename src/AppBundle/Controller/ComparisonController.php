@@ -8,20 +8,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class ProjectController
+ * Class ComparisonController
  * @package AppBundle\Controller
- * @Route("/project")
+ * @Route("/comparison")
  */
-class ProjectController extends Controller
+class ComparisonController extends Controller
 {
     /**
-     * @Route("/{username}/{project}", name="project.info", methods={"GET"})
+     * @Route("", name="comparison", methods={"POST"})
      */
-    public function indexAction(Request $request, string $username, string $project)
+    public function indexAction(Request $request)
     {
         return new JsonResponse([
-            'username' => $username,
-            'project' => $project
+            'status' => 'ok'
         ]);
     }
 }
