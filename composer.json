@@ -30,9 +30,10 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "phpmd/phpmd": "^2.6.0",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0",
-        "phpmd/phpmd" : "^2.6.0"
+        "squizlabs/php_codesniffer": "*",
+        "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
         "symfony-scripts": [
