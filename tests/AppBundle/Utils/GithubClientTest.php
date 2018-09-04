@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\AppBundle\Service;
+namespace Tests\AppBundle\Utils;
 
-use AppBundle\Service\Client\GithubClient;
+use AppBundle\Utils\Client\GithubClient;
 use Github\Api\User;
 use Github\Client;
 use Github\Exception\RuntimeException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\Client;
+namespace AppBundle\Utils\Client;
 
 use Github\Client;
 use Github\Exception\RuntimeException;
