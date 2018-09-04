@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Service\Client\VcsClientFactory;
+use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -12,15 +12,17 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package AppBundle\Controller
  * @Route("/comparison")
  */
-class ComparisonController extends Controller
+class ComparisonController extends FOSRestController
 {
     /**
      * @Route("", name="comparison", methods={"POST"})
      */
-    public function indexAction(Request $request)
+    public function indexAction(VcsClientFactory $vcsClientFactory)
     {
+        $client = $vcsClientFactory->getClient('github');
+
         return new JsonResponse([
-            'status' => 'ok'
+            'status' => $client->getUserData('kgruszowski')
         ]);
     }
 }
