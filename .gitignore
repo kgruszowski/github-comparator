@@ -42,7 +42,7 @@
 /composer.phar
 
 # Backup entities generated with doctrine:generate:entities command
-**/Entity/*~
+src/AppBundle/Entity/*~
 
 # Embedded web-server pid file
 /.web-server-pid
