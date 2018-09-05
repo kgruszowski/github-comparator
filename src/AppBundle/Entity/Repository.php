@@ -13,9 +13,6 @@ class Repository
     /** @var string $fullName */
     protected $fullName;
 
-    /** @var User $user */
-    protected $user;
-
     /** @var string $url */
     protected $url;
 
@@ -94,24 +91,6 @@ class Repository
     public function setFullName(string $fullName): Repository
     {
         $this->fullName = $fullName;
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     * @return Repository
-     */
-    public function setUser(User $user): Repository
-    {
-        $this->user = $user;
         return $this;
     }
 

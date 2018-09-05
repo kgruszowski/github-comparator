@@ -7,8 +7,12 @@ use AppBundle\Service\VcsClientFactory;
 use AppBundle\Service\VcsRepositoryCreator;
 use AppBundle\Utils\Transformer\Repository\GithubRepositoryTransformer;
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class ComparisonController
@@ -35,10 +39,30 @@ class ComparisonController extends FOSRestController
             ->addTransformer(new GithubRepositoryTransformer())
             ->createRepository('lyst', 'lightfm');
 
-        $comparatorService->compare($repositoryA, $repositoryB);
+        $comparison = $comparatorService->compare($repositoryA, $repositoryB);
 
-        return new JsonResponse([
-            'status' => 'ok'
-        ]);
+        $responseData = [
+            'status' => true,
+            'data'   => $comparison
+        ];
+
+        $response = new Response(
+            $this->getSerializer()->serialize($responseData, 'json'),
+            Response::HTTP_OK,
+            ['Content-type' => 'application/json']
+        );
+
+        return $response;
     }
+
+    protected function getSerializer(): Serializer
+    {
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer;
+    }
+
 }

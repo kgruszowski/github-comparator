@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Comparison;
 use AppBundle\Entity\Repository;
 use AppBundle\Utils\Comparison\ComparisonBuilder;
 
@@ -10,7 +11,7 @@ class ComparatorService
     protected $repositoryA;
     protected $repositoryB;
 
-    public function compare(Repository $repositoryA, Repository $repositoryB)
+    public function compare(Repository $repositoryA, Repository $repositoryB): Comparison
     {
         $builder = new ComparisonBuilder();
         $comparison = $builder->addRepositories($repositoryA, $repositoryB)
@@ -18,7 +19,11 @@ class ComparatorService
             ->addMetric('forks', $repositoryA->getNumOfForks(), $repositoryB->getNumOfForks())
             ->addMetric('watchers', $repositoryA->getNumOfForks(), $repositoryB->getNumOfForks())
             ->addMetric('issues', $repositoryA->getNumOfOpenIssues(), $repositoryB->getNumOfOpenIssues())
-            ->compare();
+            ->addMetric('createdAt', $repositoryA->getCreatedAt(), $repositoryB->getCreatedAt())
+            ->addMetric('updatedAt', $repositoryA->getUpdatedAt(), $repositoryB->getUpdatedAt())
+            ->buildComparison();
+
+        return $comparison;
     }
 
 }

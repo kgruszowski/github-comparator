@@ -2,6 +2,8 @@
 
 namespace AppBundle\Utils\Comparison;
 
+use AppBundle\Entity\Comparison;
+use AppBundle\Entity\Metric;
 use AppBundle\Entity\Repository;
 
 class ComparisonBuilder
@@ -28,9 +30,27 @@ class ComparisonBuilder
         return $this;
     }
 
-    public function compare()
+    public function buildComparison(): Comparison
     {
-        return $this->metricCollection;
+        $comparison = new Comparison();
+        $comparison->setRepositoryA($this->repositoryA);
+        $comparison->setRepositoryB($this->repositoryB);
+        $comparison->setMetricCollection($this->metricCollection);
+
+        /** @var Metric $metric */
+        foreach ($this->metricCollection as $metric) {
+            if ($metric->getWinner() == -1) {
+                $comparison->incrementNumOfWinRepositoryA();
+            } else if ($metric->getWinner() == 1) {
+                $comparison->incrementNumOfWinRepositoryB();
+            } else {
+                $comparison->incrementNumOfDraw();
+            }
+        }
+
+        $comparison->setWinner();
+
+        return $comparison;
     }
 
 }

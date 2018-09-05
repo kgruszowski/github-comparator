@@ -4,6 +4,7 @@ namespace AppBundle\Utils\Comparison;
 
 use AppBundle\Entity\Metric;
 use AppBundle\Utils\Comparison\Exception\InvalidComparisonArgumentException;
+use function PHPSTORM_META\type;
 
 class MoreIsBetterComparator implements ComparatorInterface
 {
@@ -16,8 +17,8 @@ class MoreIsBetterComparator implements ComparatorInterface
 
     public function compare($valueA, $valueB): Metric
     {
-        if (!is_numeric($valueA) || !is_numeric($valueB)) {
-            throw new InvalidComparisonArgumentException('Both values should be numeric!');
+        if (gettype($valueA) != gettype($valueB)) {
+            throw new InvalidComparisonArgumentException('Both values should be the same type!');
         }
 
         $metric = new Metric();
