@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Service\Client\VcsClientFactory;
+use AppBundle\Service\VcsClientFactory;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +22,7 @@ class ComparisonController extends FOSRestController
         $client = $vcsClientFactory->getClient('github');
 
         return new JsonResponse([
-            'status' => $client->get('kgruszowski')
+            'status' => $client->getUserData('kgruszowski')
         ]);
     }
 }
