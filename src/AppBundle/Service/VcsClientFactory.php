@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\Client;
+namespace AppBundle\Service;
 
 use AppBundle\Utils\Client\Exception\ClientNotFoundException;
 use AppBundle\Utils\Client\GithubClient;

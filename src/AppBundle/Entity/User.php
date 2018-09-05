@@ -166,12 +166,13 @@ class User
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param string $createdAt
      * @return User
      */
-    public function setCreatedAt(\DateTime $createdAt): User
+    public function setCreatedAt(string $createdAt): User
     {
-        $this->createdAt = $createdAt;
+        $createdAtDateTime = new \DateTime($createdAt);
+        $this->createdAt = $createdAtDateTime;
         return $this;
     }
 
@@ -184,12 +185,13 @@ class User
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param string $updatedAt
      * @return User
      */
-    public function setUpdatedAt(\DateTime $updatedAt): User
+    public function setUpdatedAt(string $updatedAt): User
     {
-        $this->updatedAt = $updatedAt;
+        $updatedAtDateTime = new \DateTime($updatedAt);
+        $this->updatedAt = $updatedAtDateTime;
         return $this;
     }
 }
