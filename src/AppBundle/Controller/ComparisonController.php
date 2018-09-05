@@ -12,6 +12,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -34,6 +35,10 @@ class ComparisonController extends FOSRestController
         $repositoryNameA = $extractor->extractRepositoryName($request->get('repositoryA'));
         $usernameB = $extractor->extractUsername($request->get('repositoryB'));
         $repositoryNameB = $extractor->extractRepositoryName($request->get('repositoryB'));
+
+        if (empty($usernameA) || empty($repositoryNameA) || empty($usernameB) || empty($repositoryNameB)) {
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid repository name');
+        }
 
         try {
             $client = $vcsClientFactory->getClient('github');
