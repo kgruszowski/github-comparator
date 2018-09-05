@@ -5,7 +5,7 @@ namespace AppBundle\Utils\Transformer\User;
 use AppBundle\Entity\User;
 use AppBundle\Utils\Transformer\Exception\EmptyDataException;
 
-class GithubUserUserTransformer implements UserTransformerInterface
+class GithubUserTransformer implements UserTransformerInterface
 {
     /**
      * Transform data given by github api into User model

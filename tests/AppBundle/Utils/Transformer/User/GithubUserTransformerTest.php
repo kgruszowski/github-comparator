@@ -2,7 +2,7 @@
 
 namespace Tests\AppBundle\Utils\Transformer\User;
 
-use AppBundle\Utils\Transformer\User\GithubUserUserTransformer;
+use AppBundle\Utils\Transformer\User\GithubUserTransformer;
 use PHPUnit\Framework\TestCase;
 
 class GithubUserTransformerTest extends TestCase
@@ -15,7 +15,7 @@ class GithubUserTransformerTest extends TestCase
     {
         $data = [];
 
-        $transformer = new GithubUserUserTransformer();
+        $transformer = new GithubUserTransformer();
         $user = $transformer->transform($data);
     }
 
@@ -55,11 +55,13 @@ class GithubUserTransformerTest extends TestCase
             "updated_at" => "2018-08-29T09:24:04Z"
         ];
 
-        $transformer = new GithubUserUserTransformer();
+        $transformer = new GithubUserTransformer();
         $user = $transformer->transform($data);
 
         $this->assertEquals('kgruszowski', $user->getLogin());
         $this->assertEquals('Kamil Gruszowski', $user->getName());
         $this->assertEquals('Picodi', $user->getCompany());
+        $this->assertEquals(8, $user->getNumOfRepos());
+        $this->assertEquals(1, $user->getNumOfFollowers());
     }
 }
