@@ -13,6 +13,11 @@ class ComparisonBuilder
     protected $repositoryB;
     protected $metricCollection;
 
+    /**
+     * @param Repository $repositoryA
+     * @param Repository $repositoryB
+     * @return ComparisonBuilder
+     */
     public function addRepositories(Repository $repositoryA, Repository $repositoryB): ComparisonBuilder
     {
         $this->repositoryA = $repositoryA;
@@ -21,6 +26,13 @@ class ComparisonBuilder
         return $this;
     }
 
+    /**
+     * @param string $metricName
+     * @param $valueA
+     * @param $valueB
+     * @return ComparisonBuilder
+     * @throws Exception\StrategyNotFoundException
+     */
     public function addMetric(string $metricName, $valueA, $valueB): ComparisonBuilder
     {
         $metric = (new ComparisonStrategyContext($metricName))->compare($valueA, $valueB);
@@ -30,6 +42,9 @@ class ComparisonBuilder
         return $this;
     }
 
+    /**
+     * @return Comparison
+     */
     public function buildComparison(): Comparison
     {
         $comparison = new Comparison();
@@ -43,14 +58,13 @@ class ComparisonBuilder
                 $comparison->incrementNumOfWinRepositoryA();
             } elseif ($metric->getWinner() == 1) {
                 $comparison->incrementNumOfWinRepositoryB();
+            } elseif ($metric->getWinner() == 0) {
+                $comparison->incrementNumOfDraw();
             }
-
-            $comparison->incrementNumOfDraw();
         }
 
         $comparison->setWinner();
 
         return $comparison;
     }
-
 }

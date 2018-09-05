@@ -13,6 +13,10 @@ class VcsUserCreator
     /** @var UserTransformerInterface $transformer */
     protected $transformer;
 
+    /**
+     * @param VcsClientInterface $client
+     * @return VcsUserCreator
+     */
     public function addClient(VcsClientInterface $client): VcsUserCreator
     {
         $this->client = $client;
@@ -20,6 +24,10 @@ class VcsUserCreator
         return $this;
     }
 
+    /**
+     * @param UserTransformerInterface $transformer
+     * @return VcsUserCreator
+     */
     public function addTransformer(UserTransformerInterface $transformer): VcsUserCreator
     {
         $this->transformer = $transformer;
@@ -27,6 +35,11 @@ class VcsUserCreator
         return $this;
     }
 
+    /**
+     * Fetch data from API and create User model
+     * @param string $username
+     * @return User
+     */
     public function createUser(string $username): User
     {
         $data = $this->client->getUserData($username);

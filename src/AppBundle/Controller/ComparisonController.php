@@ -35,9 +35,8 @@ class ComparisonController extends FOSRestController
         $usernameB = $extractor->extractUsername($request->get('repositoryB'));
         $repositoryNameB = $extractor->extractRepositoryName($request->get('repositoryB'));
 
-        $client = $vcsClientFactory->getClient('github');
-
         try {
+            $client = $vcsClientFactory->getClient('github');
             $repositoryA = $repositoryCreator->addClient($client)
                 ->addTransformer(new GithubRepositoryTransformer())
                 ->createRepository($usernameA, $repositoryNameA);
@@ -45,7 +44,7 @@ class ComparisonController extends FOSRestController
             $repositoryB = $repositoryCreator->addClient($client)
                 ->addTransformer(new GithubRepositoryTransformer())
                 ->createRepository($usernameB, $repositoryNameB);
-        } catch (EmptyDataException $exception) {
+        } catch (\Exception $exception) {
             throw new NotFoundHttpException('Repository not found');
         }
 

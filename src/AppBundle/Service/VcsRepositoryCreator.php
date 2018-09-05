@@ -36,6 +36,7 @@ class VcsRepositoryCreator
     }
 
     /**
+     * Fetch data from API and create Repository model
      * @param string $username
      * @param string $repositoryName
      * @return Repository
