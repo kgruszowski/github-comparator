@@ -21,9 +21,18 @@ As far as good practice concerned I use PHPUnit to write Unit Tests, PHP Messdet
 At the beginning I've planned use User and Repository model to compare two repositories. User model to compare reliability of repo owner and Repository model to compare basic stats like number of stars, watchers, last commit date etc.
 Unfortunately due to time shortage, I've implemented only Repository metrics comparison. I've also planned to use Behat as a framework to write functional tests, but I've focused only on unit tests of key components.
 
+#### Implemented comparisons
+* number of stars (more is better)
+* number of watchers (more is better)
+* number of forks (the more is better)
+* number of open issues (less is better)
+* last update/commit date (more recent is better)
+* created date (always a draw)
+
 #### Next steps
 Next steps that could be considered to develop app
 * dockerize application
-* use cache (e.g. Redis) to lower network overhead
+* use cache (e.g. Redis) to lower network overhead in Github API calls
 * add functional tests using e.g. Behat
 * add automated API documentation
+* add User model to comparison
