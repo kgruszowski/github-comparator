@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 class Repository
 {
+    /** @var int $id */
+    protected $id;
 
     /** @var string $name */
     protected $name;
@@ -11,7 +13,7 @@ class Repository
     /** @var string $fullName */
     protected $fullName;
 
-    /** @var string $user */
+    /** @var User $user */
     protected $user;
 
     /** @var string $url */
@@ -29,6 +31,9 @@ class Repository
     /** @var $numOfForks */
     protected $numOfForks;
 
+    /** @var int $numOfOpenIssues */
+    protected $numOfOpenIssues;
+
     /** @var \DateTime $createdAt */
     protected $createdAt;
 
@@ -37,6 +42,24 @@ class Repository
 
     /** @var bool $private */
     protected $private;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Repository
+     */
+    public function setId(int $id): Repository
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return string
@@ -75,18 +98,18 @@ class Repository
     }
 
     /**
-     * @return string
+     * @return User
      */
-    public function getUser(): string
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param string $user
+     * @param User $user
      * @return Repository
      */
-    public function setUser(string $user): Repository
+    public function setUser(User $user): Repository
     {
         $this->user = $user;
         return $this;
@@ -183,6 +206,24 @@ class Repository
     }
 
     /**
+     * @return int
+     */
+    public function getNumOfOpenIssues(): int
+    {
+        return $this->numOfOpenIssues;
+    }
+
+    /**
+     * @param int $numOfOpenIssues
+     * @return Repository
+     */
+    public function setNumOfOpenIssues(int $numOfOpenIssues): Repository
+    {
+        $this->numOfOpenIssues = $numOfOpenIssues;
+        return $this;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedAt(): \DateTime
@@ -191,12 +232,13 @@ class Repository
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param string $createdAt
      * @return Repository
      */
-    public function setCreatedAt(\DateTime $createdAt): Repository
+    public function setCreatedAt(string $createdAt): Repository
     {
-        $this->createdAt = $createdAt;
+        $createdAtDateTime = new \DateTime($createdAt);
+        $this->createdAt = $createdAtDateTime;
         return $this;
     }
 
@@ -209,12 +251,13 @@ class Repository
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param string $updatedAt
      * @return Repository
      */
-    public function setUpdatedAt(\DateTime $updatedAt): Repository
+    public function setUpdatedAt(string $updatedAt): Repository
     {
-        $this->updatedAt = $updatedAt;
+        $updatedAtDateTime = new \DateTime($updatedAt);
+        $this->updatedAt = $updatedAtDateTime;
         return $this;
     }
 
