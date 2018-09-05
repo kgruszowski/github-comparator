@@ -41,11 +41,11 @@ class ComparisonBuilder
         foreach ($this->metricCollection as $metric) {
             if ($metric->getWinner() == -1) {
                 $comparison->incrementNumOfWinRepositoryA();
-            } else if ($metric->getWinner() == 1) {
+            } elseif ($metric->getWinner() == 1) {
                 $comparison->incrementNumOfWinRepositoryB();
-            } else {
-                $comparison->incrementNumOfDraw();
             }
+
+            $comparison->incrementNumOfDraw();
         }
 
         $comparison->setWinner();
