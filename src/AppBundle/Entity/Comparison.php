@@ -174,9 +174,9 @@ class Comparison
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWinner(): string
+    public function getWinner(): ?string
     {
         return $this->winner;
     }

@@ -29,8 +29,7 @@ class ComparisonController extends FOSRestController
         VcsClientFactory $vcsClientFactory,
         VcsRepositoryCreator $repositoryCreator,
         ComparatorService $comparatorService
-    )
-    {
+    ) {
         $usernameA = $extractor->extractUsername($request->get('repositoryA'));
         $repositoryNameA = $extractor->extractRepositoryName($request->get('repositoryA'));
         $usernameB = $extractor->extractUsername($request->get('repositoryB'));
