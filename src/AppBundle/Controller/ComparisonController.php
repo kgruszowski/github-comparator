@@ -3,41 +3,44 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Service\ComparatorService;
+use AppBundle\Service\GithubRepositoryNameExtractor;
 use AppBundle\Service\VcsClientFactory;
 use AppBundle\Service\VcsRepositoryCreator;
 use AppBundle\Utils\Transformer\Repository\GithubRepositoryTransformer;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-/**
- * Class ComparisonController
- * @package AppBundle\Controller
- * @Route("/comparison")
- */
 class ComparisonController extends FOSRestController
 {
+
     /**
-     * @Route("", name="comparison", methods={"POST"})
+     * @Rest\Post("/comparisons", name="_comparison_action")
      */
-    public function indexAction(
+    public function comparisonAction(
+        Request $request,
+        GithubRepositoryNameExtractor $extractor,
         VcsClientFactory $vcsClientFactory,
         VcsRepositoryCreator $repositoryCreator,
         ComparatorService $comparatorService
     ) {
-        $client = $vcsClientFactory->getClient('github');
+        $usernameA = $extractor->extractUsername($request->get('repositoryA'));
+        $repositoryNameA = $extractor->extractRepositoryName($request->get('repositoryA'));
+        $usernameB = $extractor->extractUsername($request->get('repositoryB'));
+        $repositoryNameB = $extractor->extractRepositoryName($request->get('repositoryB'));
 
+        $client = $vcsClientFactory->getClient('github');
         $repositoryA = $repositoryCreator->addClient($client)
             ->addTransformer(new GithubRepositoryTransformer())
-            ->createRepository('kgruszowski', 'simplepy');
+            ->createRepository($usernameA, $repositoryNameA);
 
         $repositoryB = $repositoryCreator->addClient($client)
             ->addTransformer(new GithubRepositoryTransformer())
-            ->createRepository('lyst', 'lightfm');
+            ->createRepository($usernameB, $repositoryNameB);
 
         $comparison = $comparatorService->compare($repositoryA, $repositoryB);
 
