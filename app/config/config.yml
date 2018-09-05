@@ -74,5 +74,7 @@ sensio_framework_extra:
 fos_rest:
     routing_loader:
         default_format: json
-    body_converter:
-        enabled: true
+    exception:
+        exception_controller: 'fos_rest.exception.controller:showAction'
+        messages:
+            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
