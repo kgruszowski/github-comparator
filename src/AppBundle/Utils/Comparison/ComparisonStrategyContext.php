@@ -3,6 +3,7 @@
 namespace AppBundle\Utils\Comparison;
 
 use AppBundle\Entity\Metric;
+use AppBundle\Utils\Client\Exception\StrategyNotFoundException;
 
 class ComparisonStrategyContext
 {
@@ -15,7 +16,11 @@ class ComparisonStrategyContext
             case 'stars':
                 $this->strategy = new StarComparator();
                 break;
+            case 'issues':
+                $this->strategy = new IssueComparator();
+                break;
             default:
+                throw new StrategyNotFoundException(sprintf('There is no strategy for metric %s', $metricName));
         }
     }
 

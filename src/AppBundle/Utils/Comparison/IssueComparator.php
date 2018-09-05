@@ -5,7 +5,7 @@ namespace AppBundle\Utils\Comparison;
 use AppBundle\Entity\Metric;
 use AppBundle\Utils\Comparison\Exception\InvalidComparisonArgumentException;
 
-class StarComparator implements ComparatorInterface
+class IssueComparator implements ComparatorInterface
 {
     public function compare($valueA, $valueB): Metric
     {
@@ -14,10 +14,10 @@ class StarComparator implements ComparatorInterface
         }
 
         $metric = new Metric();
-        $metric->setMetricName('stars');
+        $metric->setMetricName('issues');
         $metric->setValueA($valueA);
         $metric->setValueB($valueB);
-        $metric->setWinner($valueB <=> $valueA);
+        $metric->setWinner($valueA <=> $valueB);
 
         return $metric;
     }

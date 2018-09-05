@@ -33,7 +33,7 @@ class ComparisonController extends FOSRestController
 
         $repositoryB = $repositoryCreator->addClient($client)
             ->addTransformer(new GithubRepositoryTransformer())
-            ->createRepository('kgruszowski', 'github-comparator');
+            ->createRepository('lyst', 'lightfm');
 
         $comparatorService->compare($repositoryA, $repositoryB);
 
