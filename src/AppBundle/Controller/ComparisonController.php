@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Service\ComparatorService;
 use AppBundle\Service\VcsClientFactory;
 use AppBundle\Service\VcsRepositoryCreator;
 use AppBundle\Utils\Transformer\Repository\GithubRepositoryTransformer;
@@ -21,9 +22,20 @@ class ComparisonController extends FOSRestController
      */
     public function indexAction(
         VcsClientFactory $vcsClientFactory,
-        VcsRepositoryCreator $repositoryCreator
+        VcsRepositoryCreator $repositoryCreator,
+        ComparatorService $comparatorService
     ) {
         $client = $vcsClientFactory->getClient('github');
+
+        $repositoryA = $repositoryCreator->addClient($client)
+            ->addTransformer(new GithubRepositoryTransformer())
+            ->createRepository('kgruszowski', 'simplepy');
+
+        $repositoryB = $repositoryCreator->addClient($client)
+            ->addTransformer(new GithubRepositoryTransformer())
+            ->createRepository('kgruszowski', 'github-comparator');
+
+        $comparatorService->compare($repositoryA, $repositoryB);
 
         return new JsonResponse([
             'status' => 'ok'
