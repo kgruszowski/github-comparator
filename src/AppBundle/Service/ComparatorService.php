@@ -16,7 +16,7 @@ class ComparatorService
         $comparison = $builder->addRepositories($repositoryA, $repositoryB)
             ->addMetric('stars', $repositoryA->getNumOfStars(), $repositoryB->getNumOfStars())
             ->addMetric('issues', $repositoryA->getNumOfOpenIssues(), $repositoryB->getNumOfOpenIssues())
-            ->compare()
+            ->compare();
     }
 
 }
