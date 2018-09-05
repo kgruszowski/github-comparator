@@ -8,4 +8,4 @@ before_script:
 
 script:
   - ./vendor/bin/simple-phpunit
-  - ./vendor/bin/phpmd src/ text cleancode,codesize,naming,design
+  - ./vendor/bin/phpmd src/ text cleancode,codesize,design
