@@ -54,12 +54,12 @@ class ComparisonController extends FOSRestController
 
         $responseData = [
             'status' => true,
-            'data' => $comparison
+            'comparison' => $comparison
         ];
 
         $response = new Response(
             $this->getSerializer()->serialize($responseData, 'json'),
-            Response::HTTP_OK,
+            Response::HTTP_CREATED,
             ['Content-type' => 'application/json']
         );
 
