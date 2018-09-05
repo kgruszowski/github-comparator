@@ -6,14 +6,12 @@ use AppBundle\Service\ComparatorService;
 use AppBundle\Service\GithubRepositoryNameExtractor;
 use AppBundle\Service\VcsClientFactory;
 use AppBundle\Service\VcsRepositoryCreator;
-use AppBundle\Utils\Transformer\Exception\EmptyDataException;
 use AppBundle\Utils\Transformer\Repository\GithubRepositoryTransformer;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -50,14 +48,12 @@ class ComparisonController extends FOSRestController
                 ->addTransformer(new GithubRepositoryTransformer())
                 ->createRepository($usernameB, $repositoryNameB);
         } catch (\Exception $exception) {
-            throw new NotFoundHttpException('Repository not found');
+            throw new HttpException(Response::HTTP_NOT_FOUND, 'Repository not found');
         }
-
-        $comparison = $comparatorService->compare($repositoryA, $repositoryB);
 
         $responseData = [
             'status' => true,
-            'comparison' => $comparison
+            'comparison' => $comparatorService->compare($repositoryA, $repositoryB)
         ];
 
         $response = new Response(
