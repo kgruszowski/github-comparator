@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\Utils;
+namespace Tests\AppBundle\Utils\Client;
 
 use AppBundle\Utils\Client\GithubClient;
 use Github\Api\Repo;
