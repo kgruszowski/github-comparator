@@ -3,10 +3,10 @@
 namespace Tests\AppBundle\Utils\Comparison;
 
 use AppBundle\Entity\Metric;
-use AppBundle\Utils\Comparison\IssueComparator;
+use AppBundle\Utils\Comparison\MoreIsBetterComparator;
 use PHPUnit\Framework\TestCase;
 
-class IssueComparatorTest extends TestCase
+class MoreIsBetterComparatorTest extends TestCase
 {
 
     /**
@@ -14,32 +14,32 @@ class IssueComparatorTest extends TestCase
      */
     public function testInvalidArgument()
     {
-        $issueComparator = new IssueComparator();
-        $issueComparator->compare('dummy', 2);
+        $starComparator = new MoreIsBetterComparator();
+        $starComparator->compare('dummy', 2);
     }
 
     public function testValueAWinner()
     {
-        $issueComparator = new IssueComparator();
-        $metric = $issueComparator->compare(10, 2);
-
-        $this->assertInstanceOf(Metric::class, $metric);
-        $this->assertEquals(1, $metric->getWinner());
-    }
-
-    public function testValueBWinner()
-    {
-        $issueComparator = new IssueComparator();
-        $metric = $issueComparator->compare(10, 20);
+        $starComparator = new MoreIsBetterComparator();
+        $metric = $starComparator->compare(10, 2);
 
         $this->assertInstanceOf(Metric::class, $metric);
         $this->assertEquals(-1, $metric->getWinner());
     }
 
+    public function testValueBWinner()
+    {
+        $starComparator = new MoreIsBetterComparator();
+        $metric = $starComparator->compare(10, 20);
+
+        $this->assertInstanceOf(Metric::class, $metric);
+        $this->assertEquals(1, $metric->getWinner());
+    }
+
     public function testDraw()
     {
-        $issueComparator = new IssueComparator();
-        $metric = $issueComparator->compare(10, 10);
+        $starComparator = new MoreIsBetterComparator();
+        $metric = $starComparator->compare(10, 10);
 
         $this->assertInstanceOf(Metric::class, $metric);
         $this->assertEquals(0, $metric->getWinner());

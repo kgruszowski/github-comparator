@@ -15,6 +15,8 @@ class ComparatorService
         $builder = new ComparisonBuilder();
         $comparison = $builder->addRepositories($repositoryA, $repositoryB)
             ->addMetric('stars', $repositoryA->getNumOfStars(), $repositoryB->getNumOfStars())
+            ->addMetric('forks', $repositoryA->getNumOfForks(), $repositoryB->getNumOfForks())
+            ->addMetric('watchers', $repositoryA->getNumOfForks(), $repositoryB->getNumOfForks())
             ->addMetric('issues', $repositoryA->getNumOfOpenIssues(), $repositoryB->getNumOfOpenIssues())
             ->compare();
     }
